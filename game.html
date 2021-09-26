@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #screen {
+      border: 10px solid #888;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      image-rendering: -moz-crisp-edges;
+      width: 500px;
+      height: 500px;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="screen" width="20" height="20"></canvas>
+  <script type="module">
+
+    import createKeybordListener from './KeybordListener.js' 
+    import createGame from './Game.js' 
+    import renderScreen from './RenderScreen.js'
+    
+    const game = createGame();
+    
+    const keybordListener = createKeybordListener(document);
+    keybordListener.subscribe(game.movePlayer);
+    
+    const screen = document.getElementById('screen');
+    renderScreen(screen, game, requestAnimationFrame)
+
+    game.addPlayer({playerId: 'player1', playerX: 0, playerY: 1})
+    game.addFruit({fruitId: 'fruit2', fruitX: 10, fruitY: 0})
+    game.addFruit({fruitId: 'fruit1', fruitX: 5, fruitY: 5})
+
+  </script>
+</body>
+
+</html>
